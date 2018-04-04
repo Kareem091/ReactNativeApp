@@ -1,0 +1,3 @@
+rootProject.name = 'PinPassion'
+
+include ':app'
