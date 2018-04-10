@@ -5,6 +5,8 @@
  */
 import Header from './src/components/common/Header';
 import PeopleList from './src/components/PeopleList';
+import LoginForm from './src/components/LoginForm';
+
 import React, { Component } from 'react';
 import {
   Platform,
@@ -27,7 +29,7 @@ export default class App extends Component {
     return (
       <View style={{ flex: 1 }}>
         <Header headerText={'I Passion'} />
-        <PeopleList />
+        <LoginForm />
       </View>
 
 

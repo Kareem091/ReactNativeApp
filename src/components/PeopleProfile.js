@@ -3,6 +3,7 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import Header from './common/Header';
 import Card from './common/Card'
 import CardItem from './common/CardItem';
+import Button from './common/Button';
 
 
 const PeopleProfile = (props) => {
@@ -10,9 +11,9 @@ const PeopleProfile = (props) => {
         <Card>
             <CardItem>
                 <TouchableOpacity>
-                <View style={styles.thumbnailContainerStyle}>
-                    <Image style={styles.thumbnailStyle} source={{ uri: props.selectedUser.photoURL }} />
-                </View>
+                    <View style={styles.thumbnailContainerStyle}>
+                        <Image style={styles.thumbnailStyle} source={{ uri: props.selectedUser.photoURL }} />
+                    </View>
                 </TouchableOpacity>
                 <View style={styles.headerContentStyle}>
                     <Text style={styles.headerTextStyle}>{props.selectedUser.displayName}</Text>
@@ -30,12 +31,16 @@ const PeopleProfile = (props) => {
             <CardItem>
                 <Image style={styles.imageStyle} source={{ uri: props.selectedUser.photoURL }} />
             </CardItem>
+            <CardItem>
+                <Button onPress={() => console.log('View Profile')} btnName={'View Profile'} />
+            </CardItem>
         </Card>
+
     )
 };
 
 const styles = {
-   
+
     headerContentStyle: {
         justifyContent: 'space-around',
         flexDirection: 'column',
