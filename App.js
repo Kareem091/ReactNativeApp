@@ -6,7 +6,7 @@
 import Header from './src/components/common/Header';
 import PeopleList from './src/components/PeopleList';
 import LoginForm from './src/components/LoginForm';
-
+import firebase from 'firebase';
 import React, { Component } from 'react';
 import {
   Platform,
@@ -24,6 +24,20 @@ const instructions = Platform.select({
 
 title: String;
 export default class App extends Component {
+
+  componentWillMount(){
+    firebase.initializeApp
+      ({
+        apiKey: "AIzaSyCYUnybFpc9v1IbCd-4MtYC144E4dhnTzs",
+        authDomain: "pinpassion-9af57.firebaseapp.com",
+        databaseURL: "https://pinpassion-9af57.firebaseio.com",
+        projectId: "pinpassion-9af57",
+        storageBucket: "pinpassion-9af57.appspot.com",
+        messagingSenderId: "396046476545"
+  
+      })
+  };
+
   render() {
     this.title = 'Passion Home';
     return (
@@ -36,6 +50,8 @@ export default class App extends Component {
     );
   }
 }
+
+
 
 const styles = StyleSheet.create({
   container: {

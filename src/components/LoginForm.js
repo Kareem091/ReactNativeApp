@@ -1,15 +1,55 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { View, Text, Alert } from 'react-native';
 import Header from './common/Header';
 import Card from './common/Card';
 import CardItem from './common/CardItem';
 import Button from './common/Button';
+import { Spinner } from './common/Spinner';
 import { Input } from './common/Input';
-
+import firebase from 'firebase';
+//import TabPage from './TabPage';
 
 
 export default class LoginForm extends Component {
-    state = { username: '', password: '' }
+    state = { username: '', password: '', loginMsg: '', loading: false }
+
+    popUp() {
+        Alert.alert(
+            'Authentication Failed',
+            'You are not Signed Up, Would you Join us, Ok for Registeration, and Cancel for Goodbye :( ',
+            [
+                { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+                { text: 'OK', onPress: () => console.log('OK Pressed') },
+            ],
+            { cancelable: false }
+        )
+    }
+    login() {
+        console.log('Login with email and Password Pressed');
+        const { username, password } = this.state;
+        this.setState({ loginMsg: '', loading: true });
+        firebase.auth().signInWithEmailAndPassword(username, password)
+            .catch(() => {
+                this.popUp();
+                this.setState({ loginMsg: 'Authentication Failed.........' })
+            });
+    }
+
+
+    SucessLogin(){
+        this.setState({ loginMsg: 'Authentication Sucess..', loading: false });
+      //  TabPage();
+
+    }
+    renderButton() {
+        if (this.state.loading) {
+            return <Spinner size={'small'} />
+        }
+        return (
+            <Button onPress={this.login.bind(this)} btnName={'Login'} />
+        )
+
+    }
 
     render() {
         return (
@@ -36,15 +76,18 @@ export default class LoginForm extends Component {
                     />
                 </CardItem>
                 <CardItem>
-                    <Button onPress={() => console.log('Login Pressed')} btnName={'Login'} />
+                    {this.renderButton()}
                 </CardItem>
                 <CardItem>
                 </CardItem>
-
                 <CardItem>
                     <Button onPress={() => console.log('Login Pressed')} btnName={'Login with Facebook'} />
                 </CardItem>
-
+                <CardItem>
+                    <Text>
+                        {this.state.loginMsg}
+                    </Text>
+                </CardItem>
             </Card>
         );
     }

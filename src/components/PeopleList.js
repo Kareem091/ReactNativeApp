@@ -6,11 +6,11 @@ import PeopleProfile from './PeopleProfile'
 
 
 export default class PeopleList extends Component {
+
     // concept to update the data, and once it updated is re-render the view again
     // state alwayes update with setStates. never ever ever use state = 
     //object used to record and respond to user trigger events
     state = { users: [] };
-
     // onLoad Methods lifeCycle Hooks
     componentWillMount() {
         console.log('Entering PeopleList...');
@@ -27,6 +27,7 @@ export default class PeopleList extends Component {
         return this.state.users.map(user => <PeopleProfile key={user.id} selectedUser={user} />);
     }
     render() {
+        const { navigate } = this.props.navigation;
         console.log(this.state);
         return (
             <ScrollView>{this.renderUsers()}</ScrollView>
